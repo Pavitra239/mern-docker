@@ -1,0 +1,22 @@
+services:
+  react-app:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - '5100:5100'
+    depends_on:
+      - node-app
+  node-app:
+    build: .
+    ports:
+      - '3000:3000'
+    env_file:
+      - app.env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'

@@ -1,0 +1,78 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Dependency directories
+bower_components/
+
+# Misc
+*.tgz
+*.gz
+*.zip
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Docker files
+*.pid
+
+# ...existing code...
+
+# Client build output
+client/dist/
+client/build/
+
+# Client node modules
+client/node_modules/
+
+# Client environment variables
+client/.env
+client/.env.local
+client/.env.*.local
+
+# Client OS generated files
+client/.DS_Store
+client/Thumbs.db
+
+# Client IDE files
+client/.vscode/
+client/.idea/
+client/*.sublime-workspace
+client/*.sublime-project
+
+# Client coverage reports
+client/coverage/
+client/*.lcov
+
+# Client misc
+client/*.tgz
+client/*.gz
+client/*.zip
+
+# Client Docker files
