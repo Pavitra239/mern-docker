@@ -8,11 +8,11 @@ services:
     depends_on:
       - node-app
   node-app:
-    build: .
+    build: ./server
     ports:
       - '3000:3000'
     env_file:
-      - app.env
+      - ./server/app.env
     depends_on:
       - mongo
 
