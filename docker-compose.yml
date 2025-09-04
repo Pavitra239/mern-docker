@@ -9,7 +9,6 @@ services:
     # Add volume mapping for React app
     volumes:
       - ./client:/app/client
-      - /app/client/node_modules
 
   node-app:
     build: ./server
@@ -22,7 +21,7 @@ services:
     # Add volume mapping for Node app
     volumes:
       - ./server:/app/server
-      - /app/server/node_modules
+      # - /app/server/node_modules
 
   mongo:
     image: mongo
