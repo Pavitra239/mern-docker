@@ -9,6 +9,8 @@ export default function UsersPage() {
     fetch(USERS_API_URL)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
+
         setUsers(data);
         setLoading(false);
       });

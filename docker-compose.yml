@@ -2,11 +2,15 @@ services:
   react-app:
     build:
       context: ./client
-      dockerfile: Dockerfile
     ports:
       - '5100:5100'
     depends_on:
       - node-app
+    # Add volume mapping for React app
+    volumes:
+      - ./client:/app/client
+      - /app/client/node_modules
+
   node-app:
     build: ./server
     ports:
@@ -15,8 +19,18 @@ services:
       - ./server/app.env
     depends_on:
       - mongo
+    # Add volume mapping for Node app
+    volumes:
+      - ./server:/app/server
+      - /app/server/node_modules
 
   mongo:
     image: mongo
+    container_name: mongo
     ports:
       - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

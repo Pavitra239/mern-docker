@@ -5,7 +5,6 @@ const userSchema = new Schema(
   {
     name: String,
     age: Number,
-    email: String,
   },
   {
     timestamps: true,
@@ -13,4 +12,4 @@ const userSchema = new Schema(
   }
 );
 
-export default model('user', userSchema);
+export default model('User', userSchema);

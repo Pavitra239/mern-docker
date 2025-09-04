@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { USERS_API_URL } from '../utils/api';
 
 export default function CreateUser() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [age, setAge] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(USERS_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email }),
-    });
-    if (res.ok) {
-      setMessage('User created!');
-      setName('');
-      setEmail('');
-    } else {
+    try {
+      const res = await fetch(USERS_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, age: parseInt(age, 10) }),
+      });
+      if (res.ok) {
+        const user = await res.json();
+        navigate(`/users/${user._id}`);
+      } else {
+        setMessage('Error creating user');
+      }
+    } catch (error) {
       setMessage('Error creating user');
+      console.log(error.message);
     }
   };
 
@@ -34,10 +40,10 @@ export default function CreateUser() {
           required
         />
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="number"
+          placeholder="Age"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
           required
         />
         <button type="submit">Create</button>

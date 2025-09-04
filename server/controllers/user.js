@@ -1,13 +1,15 @@
-import user from '../models/user.js';
+import User from '../models/user.js';
 
 const getUsers = async (req, res) => {
-  const users = await user.find({});
+  const users = await User.find({});
   return res.status(200).json(users);
 };
 
 const createUser = async (req, res) => {
-  const newUser = new user(req.body);
-  if (!newUser.name || !newUser.age || !newUser.email) {
+  const newUser = new User(req.body);
+  console.log(newUser);
+
+  if (!newUser.name || !newUser.age) {
     return res.status(400).json({ message: 'All fields are required' });
   }
   await newUser.save();
@@ -16,7 +18,9 @@ const createUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   const { id } = req.params;
-  const user = await user.findById(id);
+  console.log(id);
+
+  const user = await User.findById(id);
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
@@ -25,13 +29,13 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const updatedUser = await user.findByIdAndUpdate(id, req.body, { new: true });
+  const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
   return res.status(200).json(updatedUser);
 };
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
-  await user.findByIdAndDelete(id);
+  await User.findByIdAndDelete(id);
   return res.status(204).send();
 };
 
